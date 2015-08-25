@@ -12,17 +12,18 @@ function Deck() {
 	this.foundCard = false;
 	this.getVal = 0;
 	this.getRef = 0;
+	var _this = this;
 
 	this.getCard = function() {
 
-		this.foundCard = false;
-		while (!this.foundCard) {
-			this.getVal = Math.floor((Math.random()*this.list.length)+1)
-			this.getRef = Math.floor((Math.random()*this.list[this.getVal].length)+0)
-			if (!this.list[this.getVal][this.getRef].used) {
-				this.list[this.getVal][this.getRef].used = true;
-				this.foundCard = true;
-				return this.list[this.getVal][this.getRef];
+		_this.foundCard = false;
+		while (!_this.foundCard) {
+			_this.getVal = Math.floor((Math.random()*_this.list.length-1)+1);
+			_this.getRef = Math.floor((Math.random()*_this.list[_this.getVal].length)+0);
+			if (!_this.list[_this.getVal][_this.getRef].used) {
+				_this.list[_this.getVal][_this.getRef].used = true;
+				_this.foundCard = true;
+				return _this.list[_this.getVal][_this.getRef];
 			}
 		}
 
@@ -32,31 +33,32 @@ function Deck() {
 function Player() {
 	this.hand = [];
 	this.handVal = 0;
+	var _this = this;
 }
 
 function Dealer() {
 	this.hand = [];
 	this.handVal = 0;
-	this.handTotal = 1;
-	this.handPos = [null, "-=494px", 538] // 538px
+	this.handTotal = 0;
+	this.handPos = 470; // [null, 450, 538, 626, 714, 802]
 	this.delay = 1000;
-	var _this = this
+	this.temp = [];
+	var _this = this;
 
 	this.drawCard = function() {
 
-		$("#dealerHand1").css("display", "block");
-		$("#dealerHand1").animate({
-			left: _this.handPos[_this.handTotal]
+		_this.handTotal += 1;
+
+		_this.temp = deck.getCard();
+
+		$("#dealerHand"+_this.handTotal).css("display", "block");
+		$("#dealerHand"+_this.handTotal).animate({
+			left: _this.handPos
 		}, _this.delay, function() {
-			$("#dealerHand1").attr("src", "images/cards/5.png");
-			$("#dealerHand2").attr("src", "images/cards/b2fv.png");
-			$("#dealerHand2").css("display", "block");
-			$("#dealerHand2").animate({
-				left: dealer.handPos[2]
-			}, _this.delay, function() {
-				$(".button").slideDown(250);
-			});
+			$("#dealerHand"+_this.handTotal).attr("src", "images/cards/"+_this.temp.ref+".png");
 		});
+
+		_this.handPos += 88;
 
 	}
 }
