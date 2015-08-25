@@ -11,6 +11,8 @@
 
 		<link rel="stylesheet" type="text/css" href="styles/stylesheet.css" /> <!-- Stylesheet -->
 
+		<link href='http://fonts.googleapis.com/css?family=Bowlby+One+SC' rel='stylesheet' type='text/css'>
+
 	</head>
 
 	<body>
@@ -27,7 +29,28 @@
 				</div>
 			</div>
 
-			<img id="deck" src="images/cards/b2fv.png" />
+			<div id="dealer">
+
+				<img id="deck" class="card" src="images/cards/b2fv.png" />
+
+				<img id="dealerHand1" class="dealerHand" src="images/cards/b2fv.png" />
+				<img id="dealerHand2" class="dealerHand" src="images/cards/b2fv.png" />
+				<img id="dealerHand3" class="dealerHand" src="images/cards/b2fv.png" />
+				<img id="dealerHand4" class="dealerHand" src="images/cards/b2fv.png" />
+				<img id="dealerHand5" class="dealerHand" src="images/cards/b2fv.png" />
+
+			</div>
+
+			<div id="buttonWrapper">
+
+				<div class="button" id="hitButton">
+					<span class="innerButton">Hit</span>
+				</div>
+				<div class="button" id="standButton">
+					<span class="innerButton">Stand</span>
+				</div>
+
+			</div>
 
 			<div id="hand"></div>
 
