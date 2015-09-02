@@ -1,7 +1,9 @@
 /*
 	
-	This is the file for initializing,
+	This is the file for initializing,	
 	it includes DOM functions and variables to pre-define
+
+	By Matthew W.
 
 */
 
