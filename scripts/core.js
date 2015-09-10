@@ -38,37 +38,71 @@ function Deck() {
 function Player() {
 	this.hand = [];
 	this.handVal = 0;
+	this.handPosX = 643;
+	this.handPosY = 305;
+	this.delay = 400;
+	this.canReq = true;
+	this.temp = 0;
 	var _this = this;
+
+	this.drawCard = function(show) {
+
+		if (_this.canReq) {
+			_this.canReq = false;
+			if (_this.hand.length < 5) {
+
+				_this.temp = deck.getCard();
+				_this.hand.push(_this.temp);
+				_this.handVal += _this.hand[_this.hand.length-1].val;
+
+				$("#playerHand"+_this.hand.length).css("display", "block");
+				$("#playerHand"+_this.hand.length).animate({
+					left: _this.handPosX,
+					top: _this.handPosY
+				}, _this.delay, function() {
+					if (!show) { $("#playerHand"+_this.hand.length).attr("src", "images/cards/"+_this.hand[_this.hand.length-1].ref+".png"); }
+					$("#handValOutputPlayer").fadeOut(120, function() {
+					  $("#handValOutputPlayer").html(_this.handVal).fadeIn(120);
+					});
+					_this.canReq = true;
+				});
+
+				_this.handPosX += 15;
+				_this.handPosY += 15;
+			}
+		}
+
+		return true;
+
+	}
 }
 
 function Dealer() {
 	this.hand = [];
 	this.handVal = 0;
-	this.handTotal = 0;
 	this.handPos = 470; // [null, 450, 538, 626, 714, 802]
 	this.delay = 400;
 	this.canReq = true;
 	this.temp = 0;
 	var _this = this;
 
-	this.drawCard = function() {
+	this.drawCard = function(show) {
 
 		if (_this.canReq) {
 			_this.canReq = false;
-			if (_this.handTotal < 5) {
-				_this.handTotal += 1;
+			if (_this.hand.length < 5) {
 
 				_this.temp = deck.getCard();
 				_this.hand.push(_this.temp);
-				_this.handVal += _this.temp.val;
+				_this.handVal += _this.hand[_this.hand.length-1].val;
 
-				$("#dealerHand"+_this.handTotal).css("display", "block");
-				$("#dealerHand"+_this.handTotal).animate({
+				$("#dealerHand"+_this.hand.length).css("display", "block");
+				$("#dealerHand"+_this.hand.length).animate({
 					left: _this.handPos
 				}, _this.delay, function() {
-					$("#dealerHand"+_this.handTotal).attr("src", "images/cards/"+_this.hand[_this.hand.length-1].ref+".png");
-					$("#handValOutput").fadeOut(120, function() {
-					  $("#handValOutput").text(_this.handVal).fadeIn(120);
+					if (!show) { $("#dealerHand"+_this.hand.length).attr("src", "images/cards/"+_this.hand[_this.hand.length-1].ref+".png"); }
+					$("#handValOutputDealer").fadeOut(120, function() {
+					  $("#handValOutputDealer").html(_this.handVal).fadeIn(120);
 					});
 					_this.canReq = true;
 				});
@@ -76,6 +110,19 @@ function Dealer() {
 				_this.handPos += 88;
 			}
 		}
+
+		return true;
+
+	}
+
+	this.reset = function() {
+
+		$(".dealerHand").attr("src", "images/cards/b2fv.png");
+		$(".dealerHand").animate({left: 944}, _this.delay, function() {
+			$(".dealerHand").css("display", "none");
+			$("#deckInner").html(deck.count);
+			$("#handValOutputDealer").html(dealer.handVal).fadeIn(120);
+		});
 
 	}
 }
@@ -85,8 +132,11 @@ var player = new Player();
 var dealer = new Dealer();
 
 function startRound() {
-	$(".dealerHand").attr("src", "images/cards/b2fv.png");
-	$(".dealerHand").animate({left: 944}, dealer.delay);
-	deck = new Deck();
-	dealer = new Dealer();
+	dealer.drawCard();
+	player.drawCard();
+	setTimeout(function(){player.drawCard(); setTimeout(function(){$(".button").slideDown(200);}, 400)}, 400);
 }
+
+$("#hitButton").click(function() {
+	player.drawCard();
+});

@@ -16,9 +16,7 @@
 	</head>
 
 	<body>
-
-		<button onclick="javascript:dealer.drawCard();" id="kek">Draw Card</button>
-
+<button onclick="startRound()" style="opacity: 0;">Start</button>
 		<div id="wrapper">
 
 			<div id="rulesWrapper">
@@ -41,11 +39,26 @@
 				<img id="dealerHand4" class="dealerHand" src="images/cards/b2fv.png" />
 				<img id="dealerHand5" class="dealerHand" src="images/cards/b2fv.png" />
 
-				<div id="handVal">
+				<div id="handValDealer">
 					Dealer Hand<br />
-					<span id="handValOutput">0</span>
+					<span id="handValOutputDealer">0</span>
 				</div>
 
+			</div>
+
+			<div id="player">
+				
+				<img id="playerHand1" class="playerHand" src="images/cards/b2fv.png" />
+				<img id="playerHand2" class="playerHand" src="images/cards/b2fv.png" />
+				<img id="playerHand3" class="playerHand" src="images/cards/b2fv.png" />
+				<img id="playerHand4" class="playerHand" src="images/cards/b2fv.png" />
+				<img id="playerHand5" class="playerHand" src="images/cards/b2fv.png" />
+
+				<div id="handValPlayer">
+					Your Hand<br />
+					<span id="handValOutputPlayer">0</span>
+				</div>
+				
 			</div>
 
 			<div id="buttonWrapper">
@@ -61,7 +74,7 @@
 
 			<div id="hand"></div>
 
-			<p id="logo">Blackjack - <span id="devName">By Matthew W.</span></p>
+			<img src="images/logo.png" id="logo" />
 
 		</div>
 
