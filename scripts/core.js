@@ -16,9 +16,6 @@ function Deck() {
 
 	this.getCard = function() {
 
-		console.log("getVal: "+_this.getVal);
-		console.log(_this.list.length);
-
 		_this.foundCard = false;
 		while (!_this.foundCard) {
 			_this.getVal = Math.floor((Math.random()*10)+1);
@@ -45,14 +42,13 @@ function Player() {
 	this.temp = 0;
 	var _this = this;
 
-	this.drawCard = function(show) {
+	this.drawCard = function(repeat) {
 
 		if (_this.canReq) {
 			_this.canReq = false;
 			if (_this.hand.length < 5) {
 
-				_this.temp = deck.getCard();
-				_this.hand.push(_this.temp);
+				_this.hand.push(deck.getCard());
 				_this.handVal += _this.hand[_this.hand.length-1].val;
 
 				$("#playerHand"+_this.hand.length).css("display", "block");
@@ -60,10 +56,8 @@ function Player() {
 					left: _this.handPosX,
 					top: _this.handPosY
 				}, _this.delay, function() {
-					if (!show) { $("#playerHand"+_this.hand.length).attr("src", "images/cards/"+_this.hand[_this.hand.length-1].ref+".png"); }
-					$("#handValOutputPlayer").fadeOut(120, function() {
-					  $("#handValOutputPlayer").html(_this.handVal).fadeIn(120);
-					});
+					$("#playerHand"+_this.hand.length).attr("src", "images/cards/"+_this.hand[_this.hand.length-1].ref+".png");
+					$("#handValOutputPlayer").html(_this.handVal);
 					_this.canReq = true;
 				});
 
@@ -71,8 +65,6 @@ function Player() {
 				_this.handPosY += 15;
 			}
 		}
-
-		return true;
 
 	}
 }
@@ -134,9 +126,19 @@ var dealer = new Dealer();
 function startRound() {
 	dealer.drawCard();
 	player.drawCard();
-	setTimeout(function(){player.drawCard(); setTimeout(function(){$(".button").slideDown(200);}, 400)}, 400);
+	setTimeout(function() {
+		player.drawCard();
+	}, 420);
+	setTimeout(function() {
+		$(".button").slideDown();
+	}, 820);
 }
 
 $("#hitButton").click(function() {
 	player.drawCard();
+	setTimeout(function() {
+		if (player.handVal > 21) {
+			alert("bust!");
+		}
+	}, 420);
 });
