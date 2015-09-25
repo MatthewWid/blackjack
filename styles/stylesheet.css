@@ -242,3 +242,30 @@ body {
 
 	z-index: 1002;
 }
+
+/* The bust screen container */
+#bustScreen {
+	position: absolute;
+	width: 1366px;
+	height: 653px;
+
+	text-align: center;
+
+	opacity: 0;
+	z-index: 1003;
+
+	background-color: black;
+
+	pointer-events: none;
+}
+#bustInner {
+	position: relative;
+
+	font-size: 100px;
+	color: red;
+
+	/* top: 220px; */
+	top: -100px;
+
+	font-family: Cooper Black;
+}

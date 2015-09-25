@@ -67,6 +67,14 @@ function Player() {
 		}
 
 	}
+
+	this.reset = function() {
+		$(".playerHand").attr("src", "images/cards/b2fv.png");
+		$(".playerHand").animate({left: 944, top: 20}, _this.delay, function() {
+			$(".playerHand").css("display", "none");
+			$("#handValOutputPlayer").html(player.handVal).fadeIn(120);
+		});
+	}
 }
 
 function Dealer() {
@@ -134,11 +142,35 @@ function startRound() {
 	}, 820);
 }
 
+function resetAll() {
+	dealer.reset();
+	player.reset();
+
+	deck = new Deck();
+	player = new Player();
+	dealer = new Dealer();
+
+	setTimeout(function() {
+		$(".button").slideUp();
+		setTimeout(function() {
+			startRound();
+		}, 420)
+	}, 420);
+}
+
 $("#hitButton").click(function() {
 	player.drawCard();
 	setTimeout(function() {
 		if (player.handVal > 21) {
-			alert("bust!");
+			$("#bustScreen").animate({
+				opacity: 0.8
+			}, function() {
+				$("#bustInner").animate({
+					top: 200
+				});
+			});
 		}
 	}, 420);
 });
+
+setTimeout(function(){startRound()}, 500);
