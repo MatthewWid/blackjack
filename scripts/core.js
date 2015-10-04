@@ -143,6 +143,16 @@ function startRound() {
 }
 
 function resetAll() {
+
+	$("#bustInner").animate({
+		top: -250
+	}, function() {
+		$("#bustScreen").animate({
+			opacity: 0
+		});
+	});
+	$("#bustScreen").css("pointer-events", "none");
+
 	dealer.reset();
 	player.reset();
 
@@ -167,10 +177,18 @@ $("#hitButton").click(function() {
 			}, function() {
 				$("#bustInner").animate({
 					top: 200
+				}, function() {
+					$("#bustScreen").css("pointer-events", "auto");
 				});
 			});
 		}
 	}, 420);
 });
 
-setTimeout(function(){startRound()}, 500);
+$("#bustScreen").click(function() {
+	resetAll();
+});
+
+$(document).ready(function() {
+	startRound();
+});

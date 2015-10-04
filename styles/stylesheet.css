@@ -261,11 +261,11 @@ body {
 #bustInner {
 	position: relative;
 
-	font-size: 100px;
+	font-size: 200px;
 	color: red;
 
 	/* top: 220px; */
-	top: -100px;
+	top: -250px;
 
-	font-family: Cooper Black;
+	font-family: Impact, Charcoal, sans-serif;
 }
