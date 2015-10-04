@@ -80,7 +80,8 @@ function Player() {
 function Dealer() {
 	this.hand = [];
 	this.handVal = 0;
-	this.handPos = 470; // [null, 450, 538, 626, 714, 802]
+	this.handPosX = 470; // [null, 450, 538, 626, 714, 802]
+	//this.handPosY = 20;
 	this.delay = 400;
 	this.canReq = true;
 	this.temp = 0;
@@ -90,28 +91,30 @@ function Dealer() {
 
 		if (_this.canReq) {
 			_this.canReq = false;
-			if (_this.hand.length < 5) {
 
-				_this.temp = deck.getCard();
-				_this.hand.push(_this.temp);
-				_this.handVal += _this.hand[_this.hand.length-1].val;
-
-				$("#dealerHand"+_this.hand.length).css("display", "block");
-				$("#dealerHand"+_this.hand.length).animate({
-					left: _this.handPos
-				}, _this.delay, function() {
-					if (!show) { $("#dealerHand"+_this.hand.length).attr("src", "images/cards/"+_this.hand[_this.hand.length-1].ref+".png"); }
-					$("#handValOutputDealer").fadeOut(120, function() {
-					  $("#handValOutputDealer").html(_this.handVal).fadeIn(120);
-					});
-					_this.canReq = true;
+			_this.temp = deck.getCard();
+			_this.hand.push(_this.temp);
+			_this.handVal += _this.hand[_this.hand.length-1].val;
+			$("#dealerHand"+_this.hand.length).css("display", "block");
+			$("#dealerHand"+_this.hand.length).animate({
+				left: _this.handPosX,
+				//top: _this.handPosY
+			}, _this.delay, function() {
+				if (!show) { $("#dealerHand"+_this.hand.length).attr("src", "images/cards/"+_this.hand[_this.hand.length-1].ref+".png"); }
+				$("#handValOutputDealer").fadeOut(120, function() {
+				  $("#handValOutputDealer").html(_this.handVal).fadeIn(120);
 				});
+				_this.canReq = true;
+			});
 
-				_this.handPos += 88;
+			_this.handPosX += 88;
+			/*
+			if (_this.hand.length > 5) {
+				console.log("Drawn");
+				_this.handPosY = 128;
 			}
+			*/
 		}
-
-		console.log("Finished draw");
 
 	}
 
@@ -126,19 +129,20 @@ function Dealer() {
 
 	}
 
-	// Doesn't loop a third time for some reason?
 	this.loop = function() {
-		console.log(" ");
-		console.log("dealer.handVal: " + dealer.handVal);
 		if (dealer.handVal > 21) {
-			console.log("Bust!");
-			console.log(dealer.handVal);
-			// do something when dealer busts
+			$("#bustScreenDealer").animate({
+				opacity: 0.8
+			}, function() {
+				$("#bustInnerDealer").animate({
+					top: 150
+				}, function() {
+					$("#bustScreenDealer").css("pointer-events", "auto");
+				});
+			});
 		} else {
 			dealer.drawCard();
-			console.log("Looped again");
-			console.log("dealer.handVal: " + dealer.handVal);
-			setTimeout(this.loop, 420);
+			setTimeout(dealer.loop, 420);
 		}
 	}
 }
@@ -169,6 +173,15 @@ function resetAll() {
 	});
 	$("#bustScreen").css("pointer-events", "none");
 
+	$("#bustInnerDealer").animate({
+		top: -250
+	}, function() {
+		$("#bustScreenDealer").animate({
+			opacity: 0
+		});
+	});
+	$("#bustScreenDealer").css("pointer-events", "none");
+
 	dealer.reset();
 	player.reset();
 
@@ -184,6 +197,8 @@ function resetAll() {
 	}, 420);
 }
 
+
+
 $("#hitButton").click(function() {
 	player.drawCard();
 	setTimeout(function() {
@@ -192,7 +207,7 @@ $("#hitButton").click(function() {
 				opacity: 0.8
 			}, function() {
 				$("#bustInner").animate({
-					top: 200
+					top: 150
 				}, function() {
 					$("#bustScreen").css("pointer-events", "auto");
 				});
@@ -207,6 +222,9 @@ $("#standButton").click(function() {
 });
 
 $("#bustScreen").click(function() {
+	resetAll();
+});
+$("#bustScreenDealer").click(function() {
 	resetAll();
 });
 
