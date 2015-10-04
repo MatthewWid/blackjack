@@ -111,7 +111,7 @@ function Dealer() {
 			}
 		}
 
-		return true;
+		console.log("Finished draw");
 
 	}
 
@@ -124,6 +124,22 @@ function Dealer() {
 			$("#handValOutputDealer").html(dealer.handVal).fadeIn(120);
 		});
 
+	}
+
+	// Doesn't loop a third time for some reason?
+	this.loop = function() {
+		console.log(" ");
+		console.log("dealer.handVal: " + dealer.handVal);
+		if (dealer.handVal > 21) {
+			console.log("Bust!");
+			console.log(dealer.handVal);
+			// do something when dealer busts
+		} else {
+			dealer.drawCard();
+			console.log("Looped again");
+			console.log("dealer.handVal: " + dealer.handVal);
+			setTimeout(this.loop, 420);
+		}
 	}
 }
 
@@ -183,6 +199,11 @@ $("#hitButton").click(function() {
 			});
 		}
 	}, 420);
+});
+
+$("#standButton").click(function() {
+	$(".button").slideUp();
+	dealer.loop();
 });
 
 $("#bustScreen").click(function() {
