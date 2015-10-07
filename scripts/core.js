@@ -146,7 +146,7 @@ function Dealer() {
 				});
 
 			} else if (player.handVal > dealer.handVal) {
-				
+
 				$("#dealerBeatScreen").animate({
 					opacity: 0.8
 				}, function() {
@@ -155,7 +155,7 @@ function Dealer() {
 						top: 150
 					});
 				});
-				
+
 			}
 
 		} else {
@@ -239,10 +239,10 @@ $("#hitButton").click(function() {
 	player.drawCard();
 	setTimeout(function() {
 		if (player.handVal > 21) {
-			$("#bustScreenDealer").animate({
+			$("#bustScreen").animate({
 				opacity: 0.8
 			}, function() {
-				$("#bustScreenDealer").css("pointer-events", "auto");
+				$("#bustScreen").css("pointer-events", "auto");
 				$("#bustInner").animate({
 					top: 150
 				});
