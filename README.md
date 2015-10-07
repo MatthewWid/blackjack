@@ -3,4 +3,6 @@ Blackjack is a game I've always enjoyed remaking in different languages and in d
 
 This is a web based version that is going to be a step up from my previous attempts at creating the game.
 
+Note: There is currently no betting, I am working on a system for it.
+
 **Please report any bugs you find in the "issues" section!**
