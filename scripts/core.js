@@ -157,18 +157,17 @@ function Dealer() {
 					});
 				});
 
-			}
+			} else if (player.handVal == dealer.handVal) {
 
-		} else if (player.handVal == dealer.handVal) {
-
-			$("#dealerTieScreen").animate({
-				opacity: 0.8
-			}, function() {
-				$("#dealerTieScreen").css("pointer-events", "auto");
-				$("#dealerTieInner").animate({
-					top: 150
+				$("#dealerTieScreen").animate({
+					opacity: 0.8
+				}, function() {
+					$("#dealerTieScreen").css("pointer-events", "auto");
+					$("#dealerTieInner").animate({
+						top: 150
+					});
 				});
-			});
+			}
 
 		} else {
 			dealer.drawCard();
