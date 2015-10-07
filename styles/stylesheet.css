@@ -11,6 +11,10 @@
 	font-family: "built";
 	src: ("../fonts/built_titling.ttf");
 }
+@font-face {
+	font-family: "lato";
+	src: ("../fonts/Lato-Bold.ttf");
+}
 
 /* Targetting everything in the page */
 * {
@@ -125,6 +129,7 @@ body {
 	top: 20px;
 	left: 1034px;
 
+	font-family: 'Lato', sans-serif;
 	font-size: 20px;
 
 	color: white;
@@ -222,6 +227,7 @@ body {
 	left: 510px;
 	top: 305px;
 
+	font-family: 'Lato', sans-serif;
 	font-size: 20px;
 
 	color: white;
@@ -280,6 +286,7 @@ body {
 
 }
 
+/* Screen for beating dealer */
 #dealerBeatInner {
 
 	font-size: 200px;
@@ -287,6 +294,7 @@ body {
 
 }
 
+/* Screen for dealer winning */
 #dealerWinInner {
 
 	font-size: 200px;
@@ -294,9 +302,84 @@ body {
 
 }
 
+/* Screen for tying with dealer */
 #dealerTieInner {
 
 	font-size: 200px;
 	color: gray;
 
+}
+
+/* Betting */
+
+/* Amount of money you bet, output */
+#moneyBetPlayer {
+	position: absolute;
+	left: 750px;
+	top: 305px;
+
+	color: #4DC94D;
+
+	font-family: 'Lato', sans-serif;
+	font-size: 20px;
+
+	text-align: center;
+
+	width: 100px;
+
+}
+#moneyBetPlayerInner {
+	font-size: 65px;
+}
+#moneyBetPlayerInner:before {
+	content: "$";
+}
+
+/* Area wrapper for betting */
+#betArea {
+	position: absolute;
+
+	width: 210px;
+
+	right: 0px;
+	bottom: 0px;
+
+	border-top-left-radius: 20px;
+	background-color: gray;
+
+	padding: 10px;
+}
+
+/* Line diving chips */
+#divider {
+	position: absolute;
+	left: 50%;
+	top: 0px;
+	box-shadow: 0px 0px 10px black;
+	width: 1px;
+	height: 100%;
+
+	background-color: black;
+}
+
+/* Rules for all chip images */
+.chipImage {
+	width: 75px;
+	height: 75px;
+}
+
+.transition {
+	display: none;
+}
+
+.base {
+	position: relative;
+	left: 125px;
+}
+
+.final {
+	position: absolute;
+	left: 20px;
+
+	display: none;
 }

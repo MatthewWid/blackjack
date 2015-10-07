@@ -77,6 +77,10 @@ function Player() {
 		});
 	}
 }
+function PlayerPerm() {
+	this.money = 500;
+	this.bet = 500;
+}
 
 function Dealer() {
 	this.hand = [];
