@@ -80,8 +80,7 @@ function Player() {
 function Dealer() {
 	this.hand = [];
 	this.handVal = 0;
-	this.handPosX = 470; // [null, 450, 538, 626, 714, 802]
-	//this.handPosY = 20;
+	this.handPosX = 470;
 	this.delay = 400;
 	this.canReq = true;
 	this.temp = 0;
@@ -108,12 +107,6 @@ function Dealer() {
 			});
 
 			_this.handPosX += 88;
-			/*
-			if (_this.hand.length > 5) {
-				console.log("Drawn");
-				_this.handPosY = 128;
-			}
-			*/
 		}
 
 	}
@@ -134,12 +127,37 @@ function Dealer() {
 			$("#bustScreenDealer").animate({
 				opacity: 0.8
 			}, function() {
+				$("#bustScreenDealer").css("pointer-events", "auto");
 				$("#bustInnerDealer").animate({
 					top: 150
-				}, function() {
-					$("#bustScreenDealer").css("pointer-events", "auto");
 				});
 			});
+		} else if (dealer.handVal > 17) {
+			
+			if (dealer.handVal > player.handVal) {
+
+				$("#dealerWinScreen").animate({
+					opacity: 0.8
+				}, function() {
+					$("#dealerWinScreen").css("pointer-events", "auto");
+					$("#dealerWinInner").animate({
+						top: 150
+					});
+				});
+
+			} else if (player.handVal > dealer.handVal) {
+				
+				$("#dealerBeatScreen").animate({
+					opacity: 0.8
+				}, function() {
+					$("#dealerBeatScreen").css("pointer-events", "auto");
+					$("#dealerBeatInner").animate({
+						top: 150
+					});
+				});
+				
+			}
+
 		} else {
 			dealer.drawCard();
 			setTimeout(dealer.loop, 420);
@@ -182,6 +200,24 @@ function resetAll() {
 	});
 	$("#bustScreenDealer").css("pointer-events", "none");
 
+	$("#dealerBeatInner").animate({
+		top: -250
+	}, function() {
+		$("#dealerBeatScreen").animate({
+			opacity: 0
+		});
+	});
+	$("#dealerBeatScreen").css("pointer-events", "none");
+
+	$("#dealerWinInner").animate({
+		top: -250
+	}, function() {
+		$("#dealerWinScreen").animate({
+			opacity: 0
+		});
+	});
+	$("#dealerWinScreen").css("pointer-events", "none");
+
 	dealer.reset();
 	player.reset();
 
@@ -203,13 +239,12 @@ $("#hitButton").click(function() {
 	player.drawCard();
 	setTimeout(function() {
 		if (player.handVal > 21) {
-			$("#bustScreen").animate({
+			$("#bustScreenDealer").animate({
 				opacity: 0.8
 			}, function() {
+				$("#bustScreenDealer").css("pointer-events", "auto");
 				$("#bustInner").animate({
 					top: 150
-				}, function() {
-					$("#bustScreen").css("pointer-events", "auto");
 				});
 			});
 		}
@@ -221,10 +256,7 @@ $("#standButton").click(function() {
 	dealer.loop();
 });
 
-$("#bustScreen").click(function() {
-	resetAll();
-});
-$("#bustScreenDealer").click(function() {
+$(".coverScreen").click(function() {
 	resetAll();
 });
 
