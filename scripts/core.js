@@ -37,6 +37,7 @@ function Player() {
 	this.handVal = 0;
 	this.handPosX = 643;
 	this.handPosY = 305;
+	this.handMax = 5;
 	this.delay = 400;
 	this.canReq = true;
 	this.temp = 0;
@@ -46,7 +47,7 @@ function Player() {
 
 		if (_this.canReq) {
 			_this.canReq = false;
-			if (_this.hand.length < 5) {
+			if (_this.hand.length < _this.handMax) {
 
 				_this.hand.push(deck.getCard());
 				_this.handVal += _this.hand[_this.hand.length-1].val;
@@ -132,7 +133,7 @@ function Dealer() {
 					top: 150
 				});
 			});
-		} else if (dealer.handVal > 17) {
+		} else if (dealer.handVal >= 17) {
 			
 			if (dealer.handVal > player.handVal) {
 
@@ -157,6 +158,17 @@ function Dealer() {
 				});
 
 			}
+
+		} else if (player.handVal == dealer.handVal) {
+
+			$("#dealerTieScreen").animate({
+				opacity: 0.8
+			}, function() {
+				$("#dealerTieScreen").css("pointer-events", "auto");
+				$("#dealerTieInner").animate({
+					top: 150
+				});
+			});
 
 		} else {
 			dealer.drawCard();
@@ -217,6 +229,15 @@ function resetAll() {
 		});
 	});
 	$("#dealerWinScreen").css("pointer-events", "none");
+
+	$("#dealerTieInner").animate({
+		top: -250
+	}, function() {
+		$("#dealerTieScreen").animate({
+			opacity: 0
+		});
+	});
+	$("#dealerTieScreen").css("pointer-events", "none");
 
 	dealer.reset();
 	player.reset();
