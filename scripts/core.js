@@ -6,6 +6,21 @@
 
 */
 
+/*
+
+TODO:
+
+- Get favicon
+
+- Betting logic:
+	- Chips transition over when clicked
+	- No amount of chips, they just add to bet when clicked
+	- Remove chip if you don't have enough money to bet it
+
+- Fix bug where infinite loop occurs when you spam hit (sometimes)
+
+*/
+
 function Deck() {
 	this.list = cardList;
 	this.count = 52;
@@ -79,7 +94,11 @@ function Player() {
 }
 function PlayerPerm() {
 	this.money = 500;
-	this.bet = 500;
+	var _this = this;
+
+	this.save = function() {
+		localStorage.setItem("blackjack_totalMoney", _this.money);
+	}
 }
 
 function Dealer() {
@@ -183,6 +202,7 @@ function Dealer() {
 var deck = new Deck();
 var player = new Player();
 var dealer = new Dealer();
+var playerStats = new PlayerPerm();
 
 function startRound() {
 	dealer.drawCard();

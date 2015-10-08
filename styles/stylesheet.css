@@ -335,6 +335,44 @@ body {
 	content: "$";
 }
 
+/* Amount of money you have */
+#moneyTotalPlayer {
+	position: absolute;
+	left: 0px;
+	top: -100px;
+
+	color: #4DC94D;
+
+	font-family: 'Lato', sans-serif;
+	font-size: 20px;
+
+	text-align: center;
+
+	width: 120px;
+}
+#moneyTotalPlayerInner {
+	font-size: 65px;
+}
+#moneyTotalPlayerInner:before {
+	content: "$";
+}
+
+/* Amount of chips bet classes */
+.amount {
+	position: absolute;
+	left: -70px;
+
+	font-family: 'Lato', sans-serif;
+	font-size: 40px;
+
+	color: white;
+
+	margin-top: 15px;
+}
+.amount:before {
+	content: "x";
+}
+
 /* Area wrapper for betting */
 #betArea {
 	position: absolute;
@@ -345,7 +383,7 @@ body {
 	bottom: 0px;
 
 	border-top-left-radius: 20px;
-	background-color: gray;
+	background: linear-gradient(to bottom right, white, gray);
 
 	padding: 10px;
 }

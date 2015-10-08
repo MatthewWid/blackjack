@@ -7,6 +7,8 @@
 
 */
 
+var betting = true; // Config var to turn betting on/off
+
 /* Make a 2D array that holds the deck, if the card is used, the reference to the image, and the value of the card */
 var cardList = [
 	[], // Placeholder
@@ -291,6 +293,11 @@ var cardList = [
 		}
 	]
 ];
+
+if (!betting) {
+	$("#betArea").css("display", "none");
+	$("#moneyBetPlayer").css("display", "none");
+}
 
 // When the user clicks on the rules, it will toggle a CSS class on/off that hides/displays the rules
 var rulesSwitch = false;
