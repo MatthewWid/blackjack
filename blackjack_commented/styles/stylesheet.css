@@ -1,0 +1,426 @@
+/* Importing custom fonts */
+@font-face {
+	font-family: "Quicksand";
+	src: ("../fonts/quicksand.ttf");
+}
+@font-face {
+	font-family: "Josefin";
+	src: ("../fonts/josefin.ttf");
+}
+@font-face {
+	font-family: "built";
+	src: ("../fonts/built_titling.ttf");
+}
+@font-face {
+	font-family: "lato";
+	src: ("../fonts/Lato-Bold.ttf");
+}
+
+/* Targetting everything in the page */
+* {
+	margin: 0;
+	padding: 0;
+	-moz-user-select: none; 
+    -khtml-user-select: none; 
+    -webkit-user-select: none; 
+    -o-user-select: none;
+    cursor: url("../images/cursor.png") 6 8, auto;
+}
+
+/* The document body */
+body {
+	background: url('../images/bg.png') no-repeat center center fixed;
+	background-size: cover;
+}
+
+/* The rules wrapper */
+#rulesWrapper {
+	position: absolute;
+	left: 160px;
+	top: 20px;
+}
+/* The rules header */
+#rulesHeader {
+	width: 240px;
+	height: 40px;
+
+	background-color: black;
+	color: white;
+
+	text-align: center;
+	vertical-align: middle;
+
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+
+	cursor: pointer;
+}
+/* The arrow on the rules header */
+#arrow {
+	position: absolute;
+	width: 30px;
+	right: 10px;
+	top: 10px;
+	transition: all 0.8s ease;
+}
+/* Class that gets toggled, flipping the arrow */
+.down {
+	transform: rotateX(180deg);
+}
+#innerHeader {
+	top: 3px;
+	position: relative;
+	font-size: 30px;
+	font-family: 'Quicksand', sans-serif;
+}
+#rulesContent {
+	display: none;
+	padding: 5px;
+	color: lightGray;
+	width: 230px;
+	background-color: rgba(0, 0, 0, 0.5);
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	font-family: 'Josefin', sans-serif;
+	font-size: 15px;
+}
+
+/* Player hand circle */
+#hand {
+	position: absolute;
+	left: 625px;
+	top: 300px;
+
+	width: 96px;
+	height: 96px;
+
+	border: 5px solid white;
+	border-radius: 100%;
+}
+
+/* The deck image */
+#deck {
+	position: absolute;
+	top: 20px;
+	left: 944px;
+
+	width: 72px;
+	height: 96px;
+
+	box-shadow: 2px -2px 10px black;
+
+	background-image: url("../images/cards/b2fv.png");
+
+	text-align: center;
+}
+/* Inner number for deck */
+#deckInner {
+	position: relative;
+	font-family: 'Quicksand', sans-serif;
+	font-weight: 900;
+	font-size: 40px;
+	top: 18px;
+	color: white;
+	-webkit-text-stroke: 2px blue;
+	z-index: 1000;
+}
+
+/* The hand value of the player */
+#handValDealer {
+	position: absolute;
+	top: 20px;
+	left: 1034px;
+
+	font-family: 'Lato', sans-serif;
+	font-size: 20px;
+
+	color: white;
+
+	text-align: center;
+}
+#handValOutputDealer {
+	font-size: 65px;
+}
+
+/* The wrapper for the cards in the dealers hand */
+.dealerHand {
+	position: absolute;
+	top: 20px;
+	left: 944px;
+
+	width: 72px;
+	height: 96px;
+
+	box-shadow: 2px -2px 5px black;
+
+	display: none;
+
+	z-index: 999;
+}
+
+/* The Stand and Hit Button Classes */
+.button {
+	position: absolute;
+	top: 160px;
+
+	background-color: #66cc91;
+
+	border: 5px dashed yellow;
+	border-radius: 50px;
+
+	font-family: 'Bowlby One SC', cursive;
+	font-size: 35px;
+
+	color: white;
+
+	width: 160px;
+	height: 80px;
+
+	text-align: center;
+
+	cursor: pointer;
+
+	display: none;
+}
+/* Change the border when the button is hovered over */
+.button:hover {
+	border-style: dotted;
+}
+/* The text inside the stand and hit buttons */
+.innerButton {
+	position: relative;
+	background: -webkit-linear-gradient(#FFFFFF, #BFBFBF);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+
+	top: 10px;
+}
+/* The hit button */
+#hitButton {
+	font-size: 40px;
+	left: 450px;
+}
+/* The stand button */
+#standButton {
+	font-size: 40px;
+	left: 750px;
+}
+
+/* The logo and my name, in the middle */
+#logo {
+	position: absolute;
+	left: 602px;
+	top: 475px;
+
+	width: 150px;
+	height: 150px;
+
+	background-color: lightBlue;
+	transition: box-shadow 0.4s;
+
+	border-radius: 100%;
+}
+#logo:hover {
+	box-shadow: 0px 0px 50px red;
+}
+
+/* The hand value of the player */
+#handValPlayer {
+	position: absolute;
+	left: 510px;
+	top: 305px;
+
+	font-family: 'Lato', sans-serif;
+	font-size: 20px;
+
+	color: white;
+
+	text-align: center;
+}
+#handValOutputPlayer {
+	font-size: 65px;
+}
+
+/* The container for the elements the cards are in */
+.playerHand {
+	position: absolute;
+	top: 20px;
+	left: 944px;
+
+	display: none;
+
+	z-index: 1002;
+}
+
+/* The bust screen container */
+.coverScreen {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+
+	text-align: center;
+
+	opacity: 0;
+	z-index: 1003;
+
+	background-color: black;
+
+	pointer-events: none;
+}
+.inner {
+	position: relative;
+	top: -250px;
+	font-family: Impact, Charcoal, sans-serif;
+}
+
+/* Player bust screen */
+#bustInner {
+
+	font-size: 200px;
+	color: red;
+
+}
+
+/* Bust screen for dealer */
+#bustInnerDealer {
+
+	font-size: 200px;
+	color: lightBlue;
+
+}
+
+/* Screen for beating dealer */
+#dealerBeatInner {
+
+	font-size: 200px;
+	color: lightGreen;
+
+}
+
+/* Screen for dealer winning */
+#dealerWinInner {
+
+	font-size: 200px;
+	color: #FF0033;
+
+}
+
+/* Screen for tying with dealer */
+#dealerTieInner {
+
+	font-size: 200px;
+	color: gray;
+
+}
+
+/* Betting stuff that was not used :( */
+
+/* Amount of money you bet, output */
+#moneyBetPlayer {
+	position: absolute;
+	left: 750px;
+	top: 305px;
+
+	color: #4DC94D;
+
+	font-family: 'Lato', sans-serif;
+	font-size: 20px;
+
+	text-align: center;
+
+	width: 100px;
+
+}
+#moneyBetPlayerInner {
+	font-size: 65px;
+}
+#moneyBetPlayerInner:before {
+	content: "$";
+}
+
+/* Amount of money you have */
+#moneyTotalPlayer {
+	position: absolute;
+	left: 0px;
+	top: -100px;
+
+	color: #4DC94D;
+
+	font-family: 'Lato', sans-serif;
+	font-size: 20px;
+
+	text-align: center;
+
+	width: 120px;
+}
+#moneyTotalPlayerInner {
+	font-size: 65px;
+}
+#moneyTotalPlayerInner:before {
+	content: "$";
+}
+
+/* Amount of chips bet classes */
+.amount {
+	position: absolute;
+	left: -70px;
+
+	font-family: 'Lato', sans-serif;
+	font-size: 40px;
+
+	color: white;
+
+	margin-top: 15px;
+}
+.amount:before {
+	content: "x";
+}
+
+/* Area wrapper for betting */
+#betArea {
+	position: absolute;
+
+	width: 210px;
+
+	right: 0px;
+	bottom: 0px;
+
+	border-top-left-radius: 20px;
+	background: linear-gradient(to bottom right, white, gray);
+
+	padding: 10px;
+}
+
+/* Line diving chips */
+#divider {
+	position: absolute;
+	left: 50%;
+	top: 0px;
+	box-shadow: 0px 0px 10px black;
+	width: 1px;
+	height: 100%;
+
+	background-color: black;
+}
+
+/* Rules for all chip images */
+.chipImage {
+	width: 75px;
+	height: 75px;
+}
+
+.transition {
+	display: none;
+}
+
+.base {
+	position: relative;
+	left: 125px;
+}
+
+.final {
+	position: absolute;
+	left: 20px;
+
+	display: none;
+}

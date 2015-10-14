@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+
+		<title>BlackJack by Matthew W.</title>
+
+		<script src="lib/jquery.js"></script> <!-- Import jQuery library -->
+		<script src="scripts/init.js" defer></script> <!-- Get JS file to initiate game -->
+		<script src="scripts/core.js" defer></script> <!-- Get core JS file of game -->
+
+		<link rel="stylesheet" type="text/css" href="styles/stylesheet.css" /> <!-- Import the CSS -->
+
+		<link href='http://fonts.googleapis.com/css?family=Bowlby+One+SC' rel='stylesheet' type='text/css'> <!-- Import a font from Google -->
+
+	</head>
+
+	<body>
+		<div id="wrapper"> <!-- Wrap all elements in a div -->
+
+			<div id="bustScreen" class="coverScreen"><span id="bustInner" class="inner">You Bust!</span></div>  <!-- When the player busts this screen will appear -->
+			<div id="bustScreenDealer" class="coverScreen"><span id="bustInnerDealer" class="inner">Dealer Bust!</span></div>  <!-- When the dealer busts this screen will appear -->
+			<div id="dealerBeatScreen" class="coverScreen"><span id="dealerBeatInner" class="inner">Beat Dealer!</span></div> <!-- When the dealer loses to the player this screen will appear -->
+			<div id="dealerWinScreen" class="coverScreen"><span id="dealerWinInner" class="inner">Dealer Win!</span></div> <!-- When the dealer beats the player this screen will apear -->
+			<div id="dealerTieScreen" class="coverScreen"><span id="dealerTieInner" class="inner">It's a tie!</span></div> <!-- When the dealer and play tie this screen will appear -->
+
+			<div id="rulesWrapper"> <!-- A wrapper div for the rules -->
+				<div id="rulesHeader"> <!-- Wrapper for the header of rules -->
+					<span id="innerHeader">Rules</span> <!-- The text in the rules header -->
+					<img id="arrow" src="images/arrow.png" /> <!-- The arrow in the rules header -->
+				</div>
+				<div id="rulesContent"> <!-- Div for rules content text -->
+					BlackJack is a game of the player versus the dealer.<br /><br />At the start of the round the dealer places one card up. The player is dealt a hand of two cards. The player has two options, <b>Hit</b> or <b>Stand</b>.<br /><b>Hit</b>ting is when the player requests another card (card values range from 1-11). <b>Stand</b>ing is when you end your turn and submit your hand.<br /><br />The aim of the game is to get ones hand value as close to 21 without exceeding 21, this is acomplished by hitting and then standing when you are happy with your hand, going over 21 is called a bust and your hand is discarded and your turn is ended.<br /><br />Once you choose to stand, it is the dealers turn, the dealer will keep drawing cards until their handle value goes over 17 or they bust (go over 21).<br />To win, the dealer must bust or you must have a higher hand value than the dealer once he has stopped drawing.  <!-- The rules -->
+				</div>
+			</div>
+
+			<div id="dealer">  <!-- Wrapper for dealer elements -->
+
+				<div id="deck" class="card"><span id="deckInner">52</span></div> <!-- The deck, with the total amount of cards -->
+
+				<!-- 5 images that change and are animated as the dealers hand -->
+				<img id="dealerHand1" class="dealerHand" src="images/cards/b2fv.png" />
+				<img id="dealerHand2" class="dealerHand" src="images/cards/b2fv.png" />
+				<img id="dealerHand3" class="dealerHand" src="images/cards/b2fv.png" />
+				<img id="dealerHand4" class="dealerHand" src="images/cards/b2fv.png" />
+				<img id="dealerHand5" class="dealerHand" src="images/cards/b2fv.png" />
+
+				<div id="handValDealer"> <!-- The hand value of the dealer, wrapper -->
+					Dealer Hand<br /> <!-- Text -->
+					<span id="handValOutputDealer">0</span> <!-- Span wrapper for number -->
+				</div>
+
+			</div>
+
+			<div id="player"> <!-- Player elements wrapper -->
+				
+				<!-- Images that are modified and animated as the players hand, by default they are the playing card backfaces -->
+				<img id="playerHand1" class="playerHand" src="images/cards/b2fv.png" />
+				<img id="playerHand2" class="playerHand" src="images/cards/b2fv.png" />
+				<img id="playerHand3" class="playerHand" src="images/cards/b2fv.png" />
+				<img id="playerHand4" class="playerHand" src="images/cards/b2fv.png" />
+				<img id="playerHand5" class="playerHand" src="images/cards/b2fv.png" />
+
+				<div id="handValPlayer"> <!-- The value of the players hand, wrapper -->
+					Your Hand<br /> <!-- Text -->
+					<span id="handValOutputPlayer">0</span> <!-- Hand value number for player -->
+				</div>
+
+				<!-- Betting system stuffed that was not used - START -->
+				<div id="moneyBetPlayer">
+					Your Bet:<br />
+					<span id="moneyBetPlayerInner">0</span>
+				</div>
+
+				<div id="betArea">
+
+					<div id="moneyTotalPlayer">
+						Your Money:<br />
+						<span id="moneyTotalPlayerInner">500</span>
+					</div>
+
+					<div id="divider"></div>
+
+					<div id="chip_100">
+						<div class="amount" id="amount_100">0</div>
+						<img src="images/chips/100.png" class="chipImage base" id="chip_100_base" />
+						<img src="images/chips/100.png" class="chipImage transition" id="chip_100_transition" />
+						<img src="images/chips/100.png" class="chipImage final" id="chip_100_final" />
+					</div>
+					<div id="chip_500">
+						<div class="amount" id="amount_500">0</div>
+						<img src="images/chips/500.png" class="chipImage base" id="chip_200_base" />
+						<img src="images/chips/500.png" class="chipImage transition" id="chip_500_transition" />
+						<img src="images/chips/500.png" class="chipImage final" id="chip_500_final" />
+					</div>
+					<div class="amount" id="amount_1000">0</div>
+					<div id="chip_1000">
+						<img src="images/chips/1000.png" class="chipImage base" id="chip_1000_base" />
+						<img src="images/chips/1000.png" class="chipImage transition" id="chip_1000_transition" />
+						<img src="images/chips/1000.png" class="chipImage final" id="chip_1000_final" />
+					</div>
+					<div class="amount" id="amount_5000">0</div>
+					<div id="chip_5000">
+						<img src="images/chips/5000.png" class="chipImage base" id="chip_5000_base" />
+						<img src="images/chips/5000.png" class="chipImage transition" id="chip_5000_transition" />
+						<img src="images/chips/5000.png" class="chipImage final" id="chip_5000_final" />
+					</div>
+						
+					</div>
+
+				</div>
+				<!-- Betting system stuff that was not used - END -->
+				
+			</div>
+
+
+			<div id="buttonWrapper"> <!-- Wrapper for the hit and stand buttons -->
+
+				<div class="button" id="hitButton"> <!-- Hit button wrapper -->
+					<span class="innerButton">Hit</span> <!-- Inner text for hit button -->
+				</div>
+				<div class="button" id="standButton"> <!-- Stand button wrapper -->
+					<span class="innerButton">Stand</span> <!-- Inner text for stand button -->
+				</div>
+
+			</div>
+
+			<div id="hand"></div> <!-- Hand container? -->
+
+			<img src="images/logo.png" id="logo" /> <!-- The logo at the bottom fo the screen -->
+
+		</div>
+
+	</body>
+	
+</html>
