@@ -79,6 +79,15 @@ function Player() {
 
 				_this.handPosX += 15;
 				_this.handPosY += 15;
+			} else {
+				$("#dealerBeatScreen").animate({
+					opacity: 0.8
+				}, function() {
+					$("#dealerBeatScreen").css("pointer-events", "auto");
+					$("#dealerBeatInner").animate({
+						top: 150
+					});
+				});
 			}
 		}
 

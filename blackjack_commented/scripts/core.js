@@ -79,6 +79,15 @@ function Player() { // Constructor function for player
 
 				_this.handPosX += 15; // Increment the next cards x position so it doesn't go directly ontop
 				_this.handPosY += 15; // Increment the next cards y position so it doesn't go directly ontop
+			} else { // If the player has reached the hand limit, let them beat the dealer from a 5-card-trick
+				$("#dealerBeatScreen").animate({ // Animate dealer beat screen
+					opacity: 0.8 // Fade in dealer beat screen
+				}, function() { // When the animation has finished
+					$("#dealerBeatScreen").css("pointer-events", "auto"); // Make the screen clickable
+					$("#dealerBeatInner").animate({ // Animate the screen text
+						top: 150 // Make the text fly in from the top
+					});
+				});
 			}
 		}
 
