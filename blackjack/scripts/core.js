@@ -114,6 +114,7 @@ function Dealer() {
 	this.hand = [];
 	this.handVal = 0;
 	this.handPosX = 470;
+	this.handMax = 5;
 	this.delay = 400;
 	this.canReq = true;
 	this.temp = 0;
