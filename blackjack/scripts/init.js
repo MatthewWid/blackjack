@@ -7,7 +7,7 @@
 
 */
 
-var betting = true; // Config var to turn betting on/off
+var betting = false; // Config var to turn betting on/off
 
 /* Make a 2D array that holds the deck, if the card is used, the reference to the image, and the value of the card */
 var cardList = [

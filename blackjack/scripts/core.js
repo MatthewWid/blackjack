@@ -123,21 +123,33 @@ function Dealer() {
 
 		if (_this.canReq) {
 			_this.canReq = false;
+			if (_this.hand.length < _this.handMax) {
 
-			_this.temp = deck.getCard();
-			_this.hand.push(_this.temp);
-			_this.handVal += _this.hand[_this.hand.length-1].val;
-			$("#dealerHand"+_this.hand.length).css("display", "block");
-			$("#dealerHand"+_this.hand.length).animate({
-				left: _this.handPosX,
-				//top: _this.handPosY
-			}, _this.delay, function() {
-				if (!show) { $("#dealerHand"+_this.hand.length).attr("src", "images/cards/"+_this.hand[_this.hand.length-1].ref+".png"); }
-				$("#handValOutputDealer").fadeOut(120, function() {
-				  $("#handValOutputDealer").html(_this.handVal).fadeIn(120);
+				_this.temp = deck.getCard();
+				_this.hand.push(_this.temp);
+				_this.handVal += _this.hand[_this.hand.length-1].val;
+				$("#dealerHand"+_this.hand.length).css("display", "block");
+				$("#dealerHand"+_this.hand.length).animate({
+					left: _this.handPosX,
+					//top: _this.handPosY
+				}, _this.delay, function() {
+					if (!show) { $("#dealerHand"+_this.hand.length).attr("src", "images/cards/"+_this.hand[_this.hand.length-1].ref+".png"); }
+					$("#handValOutputDealer").fadeOut(120, function() {
+					  $("#handValOutputDealer").html(_this.handVal).fadeIn(120);
+					});
+					_this.canReq = true;
 				});
-				_this.canReq = true;
-			});
+
+			} else {
+				$("#dealerWinScreen").animate({
+					opacity: 0.8
+				}, function() {
+					$("#dealerWinScreen").css("pointer-events", "auto");
+					$("#dealerWinInner").animate({
+						top: 150
+					});
+				});
+			}
 
 			_this.handPosX += 88;
 		}

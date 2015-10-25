@@ -123,21 +123,32 @@ function Dealer() { // Constructor function for the dealer
 
 		if (_this.canReq) { // If we can request a card
 			_this.canReq = false; // Set it so we cannot request a card until the code has finished executing
+			if (_this.hand.length < _this.handMax) {
 
-			_this.temp = deck.getCard(); // Assign the temporary variable to be a card that we'll draw from the deck
-			_this.hand.push(_this.temp); // Add the drawn card to the dealers hand array (list)
-			_this.handVal += _this.hand[_this.hand.length-1].val; // Increase the dealers hand value based on the card drawn
-			$("#dealerHand"+_this.hand.length).css("display", "block"); // Make one card from the deck visible
-			$("#dealerHand"+_this.hand.length).animate({ // Animate the card made visible
-				left: _this.handPosX, // Animate the card made visibile to go to the constructors x position var
-				//top: _this.handPosY
-			}, _this.delay, function() { // Set the time the animation takes | When the animation has completed run this code
-				if (!show) { $("#dealerHand"+_this.hand.length).attr("src", "images/cards/"+_this.hand[_this.hand.length-1].ref+".png"); } // If the parametre is false, don't flip over the card. This is so at the start of the round the dealer draws one faceup card, and one facedown card. This was, however, never utilised.
-				$("#handValOutputDealer").fadeOut(120, function() { // Update the number next to the deck to be the dealers total hand value
-				  $("#handValOutputDealer").html(_this.handVal).fadeIn(120); // Update the number next to the deck to be the dealers total hand value
+				_this.temp = deck.getCard(); // Assign the temporary variable to be a card that we'll draw from the deck
+				_this.hand.push(_this.temp); // Add the drawn card to the dealers hand array (list)
+				_this.handVal += _this.hand[_this.hand.length-1].val; // Increase the dealers hand value based on the card drawn
+				$("#dealerHand"+_this.hand.length).css("display", "block"); // Make one card from the deck visible
+				$("#dealerHand"+_this.hand.length).animate({ // Animate the card made visible
+					left: _this.handPosX, // Animate the card made visibile to go to the constructors x position var
+					//top: _this.handPosY
+				}, _this.delay, function() { // Set the time the animation takes | When the animation has completed run this code
+					if (!show) { $("#dealerHand"+_this.hand.length).attr("src", "images/cards/"+_this.hand[_this.hand.length-1].ref+".png"); } // If the parametre is false, don't flip over the card. This is so at the start of the round the dealer draws one faceup card, and one facedown card. This was, however, never utilised.
+					$("#handValOutputDealer").fadeOut(120, function() { // Update the number next to the deck to be the dealers total hand value
+					  $("#handValOutputDealer").html(_this.handVal).fadeIn(120); // Update the number next to the deck to be the dealers total hand value
+					});
+					_this.canReq = true; // Make it so we can request another card, if we want to
 				});
-				_this.canReq = true; // Make it so we can request another card, if we want to
-			});
+			} else { // If the dealer gets a 5 card trick
+				$("#dealerWinScreen").animate({ // Animate the dealer win screen
+					opacity: 0.8 // Fade in the win screen
+				}, function() {
+					$("#dealerWinScreen").css("pointer-events", "auto"); // Make the screen clickable
+					$("#dealerWinInner").animate({ // Animate the text
+						top: 150 // Make the text fly in from the top
+					});
+				});
+			}
 
 			_this.handPosX += 88; // Increment the x hand position for the next card, so it moves up
 		}
